@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -16,7 +17,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user = Auth::user()->load('accounts');
+    return Inertia::render('Dashboard', [
+        'accounts' => $user->accounts,
+        'userEmail' => $user->email
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -26,6 +31,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/create-account', [AccountController::class, 'createAccountView'])->name('account.createView');
     Route::post('user/account', [AccountController::class, 'createAccount'])->name('account.create');
+    
+    Route::get('/transfer', [TransactionController::class, 'makeTransactionView'])->name('transactions.makeTransactionView');
+    Route::post('/transfer', [TransactionController::class, 'makeTransaction'])->name('transactions.makeTransaction');
+
+    Route::get('/recent-transactions', [TransactionController::class, 'recentTransactionsView'])->name('transactions.recentTransactionsView');
+    Route::get('/generate-statements', [AccountController::class, 'generateStatements'])->name('account.generateStatements');
+    Route::get('/pdf-statements', [AccountController::class, 'pdfStatements'])->name('account.pdfStatements');
 });
 
 require __DIR__.'/auth.php';
