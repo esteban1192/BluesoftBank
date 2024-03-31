@@ -1,5 +1,5 @@
 <template>
-  <Header :userEmail="userEmail" />
+  <Header :user="user" />
   <div class="mt-4">
     <h2 class="text-lg font-semibold mb-2">Generate Statements</h2>
     <form @submit.prevent="generateStatements">
@@ -36,8 +36,8 @@ import Header from '../../Components/Header.vue';
 import axios from 'axios';
 
 const props = defineProps({
-    userEmail: {
-        type: String,
+    user: {
+        type: Object,
         required: true
     },
     accountId: {

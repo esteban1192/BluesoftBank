@@ -17,7 +17,7 @@ class TransactionController extends Controller
     public function makeTransactionView() {
         $user = Auth::user();
         return Inertia::render('Transaction/MakeTransaction', [
-            'userEmail' => $user->email,
+            'user' => $user,
             'accounts' => $user->accounts,
         ]);
     }
@@ -103,7 +103,8 @@ class TransactionController extends Controller
     
             // Prepare the data to be passed to the Inertia view
             $data = [
-                'transactions' => $transactions
+                'transactions' => $transactions,
+                'user' => $user
             ];
     
             // Return the Inertia view with the transaction data

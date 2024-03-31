@@ -1,5 +1,5 @@
 <template>
-    <Header :userEmail="userEmail"></Header>
+    <Header :user="user"></Header>
     <form class="max-w-md mx-auto mt-8" @submit.prevent="createAccount">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="accountType">Account Type:</label>
@@ -29,7 +29,7 @@ import { ref } from 'vue';
 import Header from '../../Components/Header.vue';
 import { useForm } from '@inertiajs/vue3';
 
-const props = defineProps(['userEmail']);
+const props = defineProps(['user']);
 const form = useForm({
     accountType: 'checking',
     balance: 0,

@@ -5,9 +5,10 @@
             <Link href="/create-account" class="ml-4 hover:underline cursor-pointer">Create Account</Link>
             <Link href="/transfer" class="ml-4 hover:underline cursor-pointer">Transfer</Link>
             <Link href="/recent-transactions" class="ml-4 hover:underline cursor-pointer">Recent Transactions</Link>
+            <Link v-if="user.isAdmin" href="/admin/users-list" class="ml-4 hover:underline cursor-pointer">Users List</Link>
         </div>
         <div>
-            <p>{{ userEmail }}</p>
+            <p>{{ user.email }}</p>
         </div>
     </header>
 </template>
@@ -17,8 +18,8 @@ import { defineProps } from 'vue';
 import { Link } from '@inertiajs/vue3'
 
 const props = defineProps({
-    userEmail: {
-        type: String,
+    user: {
+        type: Object,
         required: true
     }
 });

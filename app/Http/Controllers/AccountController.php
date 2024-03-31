@@ -19,7 +19,7 @@ class AccountController extends Controller
     public function createAccountView() {
         $user = Auth::user();
         return Inertia::render('Account/CreateAccount', [
-            'userEmail' => $user->email
+            'user' => $user
         ]);
     }
     
@@ -72,7 +72,7 @@ class AccountController extends Controller
         $data = [
             'accountId' => (int)$accountId,
             'month' => $month,
-            'userEmail' => $user->email
+            'user' => $user
         ];
 
         return Inertia::render('Account/GenerateStatementsForm', $data);

@@ -1,5 +1,5 @@
 <template>
-    <Header :userEmail="userEmail"></Header>
+    <Header :user="user"></Header>
     <form class="max-w-md mx-auto mt-8" @submit.prevent="makeTransaction">
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="fromAccount">From Account:</label>
@@ -30,7 +30,7 @@ import { ref } from 'vue';
 import Header from '../../Components/Header.vue';
 import { useForm } from '@inertiajs/vue3';
 
-const props = defineProps(['userEmail', 'accounts']);
+const props = defineProps(['user', 'accounts']);
 const form = useForm({
     fromAccount: '',
     toAccount: '',

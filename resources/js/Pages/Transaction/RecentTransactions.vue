@@ -1,5 +1,5 @@
 <template>
-    <Header :userEmail="userEmail" />
+    <Header :user="user" />
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Recent Transactions</h1>
 
@@ -44,8 +44,8 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    userEmail: {
-        type: String,
+    user: {
+        type: Object,
         required: true
     }
 });

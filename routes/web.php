@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -20,7 +21,7 @@ Route::get('/dashboard', function () {
     $user = Auth::user()->load('accounts');
     return Inertia::render('Dashboard', [
         'accounts' => $user->accounts,
-        'userEmail' => $user->email
+        'user' => $user
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recent-transactions', [TransactionController::class, 'recentTransactionsView'])->name('transactions.recentTransactionsView');
     Route::get('/generate-statements', [AccountController::class, 'generateStatements'])->name('account.generateStatements');
     Route::get('/pdf-statements', [AccountController::class, 'pdfStatements'])->name('account.pdfStatements');
+    Route::get('/admin/users-list', [AdminController::class, 'usersListView'])->name('admin.usersListView');
 });
 
 require __DIR__.'/auth.php';

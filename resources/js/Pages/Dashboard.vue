@@ -1,5 +1,5 @@
 <template>
-    <Header :userEmail="userEmail" />
+    <Header :user="user" />
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4">Account Dashboard</h1>
         <div v-if="accounts.length === 0" class="text-gray-600">No accounts found.</div>
@@ -27,8 +27,8 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    userEmail: {
-        type: String,
+    user: {
+        type: Object,
         required: true
     }
 })
